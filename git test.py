@@ -17,6 +17,7 @@ labels = []
 docs_x = []
 docs_y = []
 
+
 for intent in data["intents"]:
     for patterns in intent["patterns"]:
         wrds = nltk.word_tokenize(patterns)
@@ -41,7 +42,6 @@ for x, doc in enumerate(docs_x):
     bag = []
 
     wrd = [stemmer.stem(w) for w in doc]
-
     for w in words:
         if w in wrds:
             bag.append(1)
@@ -60,7 +60,7 @@ net = tflearn.input_data(shape=[None, len(training[0])])
 net = tflearn.fully_connected(net, 8)
 net = tflearn.fully_connected(net, 8)
 net = tflearn.fully_connected(net, len(output[0]), activation="softmax")
-met = tflearn.regression(net)
+net = tflearn.regression(net)
 
 model = tflearn.DNN(net)
 
